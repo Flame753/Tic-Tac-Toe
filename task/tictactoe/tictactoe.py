@@ -8,18 +8,28 @@ def winner(who):
 
 def is_three_row(board, p):
     symbol = " " + p
-    row_decrease = len(board) - 1
+    col_counter = 0
+    backslash_counter = 0
+    slash = - 1
+    slash_counter = 0
     for row in range(len(board)):
         if board[row].count(symbol) == 3:
             return True, winner(symbol)  # Player won by a row
-        if board[row][row].count(symbol) == 3:
-            return True, winner(symbol)  # Player won by a diagonal \
-        if board[row_decrease][row_decrease].count(symbol) == 3:
-            return True, winner(symbol)  # Player won by a diagonal /
+        if board[row][row] == symbol:
+            backslash_counter += 1
+            if backslash_counter == 3:
+                return True, winner(symbol)  # Player won by a backslash \
+        if board[row][slash] == symbol:
+            slash_counter += 1
+            if slash_counter == 3:
+                return True, winner(symbol)  # Player won by a diagonal /
         for col in range(len(board[row])):
-            if board[col][row].count(symbol) == 3:
-                return True, winner(symbol)  # Player won by a column
-        row_decrease -= 1
+            if board[col][row] == symbol:
+                col_counter += 1
+                if col_counter == 3:
+                    return True, winner(symbol)  # Player won by a column
+        slash -= 1
+        col_counter = 0
     return False, f"{symbol} lost"
 
 
