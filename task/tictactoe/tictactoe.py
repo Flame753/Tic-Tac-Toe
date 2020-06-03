@@ -1,11 +1,24 @@
-# write your code here
 def frame():
     print("---------")
 
 
-def is_three_row(state):
-    if x in state:
-        print("yes")
+def reset(task):
+    task = 0
+    return task
+
+
+def is_three_row(board, p):
+    symbol = " " + p
+    count = 0
+    for row in range(len(board)):
+        if board[row].count(symbol) == 3:
+            pass  # Player won
+        for col in range(len(board[row])):
+            if board[col][row] == symbol:
+                count += 1
+                if count == 3:
+                    pass  # Player won
+        reset()
 
 
 cell = str(input("Enter cells: "))
@@ -18,4 +31,4 @@ for x in range(0, len(cell)):
 frame()
 
 print(cell)
-is_three_row(cell)
+is_three_row(cell, "x", "o")
