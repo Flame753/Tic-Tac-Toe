@@ -6,6 +6,15 @@ def winner(who):
     return f"{who} wins"
 
 
+def many(board, p):
+    symbol = " " + p
+    total = 0
+    for row in range(len(board)):
+        amount = board[row].count(symbol)
+        total += amount
+    return total
+
+
 def is_three_row(board, p):
     symbol = " " + p
     col_counter = 0
@@ -33,7 +42,7 @@ def is_three_row(board, p):
     return False, f"{symbol} lost"
 
 
-cell = str(input("Enter cells: "))
+cell = str(input("Enter cells: ")).upper()
 cell = [" "+i for i in cell]  # A list with one "front space" with a "number"
 cell = [cell[i:i+3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
 
@@ -42,6 +51,8 @@ for x in range(0, len(cell)):
     print(f"|{''.join(cell[x])} |")
 frame()
 
-print(cell)
 print(is_three_row(cell, "x")[1])
 print(is_three_row(cell, "o")[1])
+
+if is_three_row(cell, "X")[0] and is_three_row(cell, "O")[0] or abs(many(cell, "X") - many(cell, "O")) >= 2:
+    print("Impossible")
