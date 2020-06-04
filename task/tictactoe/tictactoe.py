@@ -51,8 +51,15 @@ for x in range(0, len(cell)):
     print(f"|{''.join(cell[x])} |")
 frame()
 
-print(is_three_row(cell, "x")[1])
-print(is_three_row(cell, "o")[1])
-
 if is_three_row(cell, "X")[0] and is_three_row(cell, "O")[0] or abs(many(cell, "X") - many(cell, "O")) >= 2:
     print("Impossible")
+elif not is_three_row(cell, "X")[0] and not is_three_row(cell, "O")[0] and many(cell, "X") + many(cell, "O") != 9:
+    print("Game not finished")
+elif not is_three_row(cell, "X")[0] and not is_three_row(cell, "O")[0] and many(cell, "X") + many(cell, "O") == 9:
+    print("Draw")
+elif is_three_row(cell, "X")[0]:
+    print(winner("X"))
+elif is_three_row(cell, "O")[0]:
+    print(winner("O"))
+else:
+    print("There is a problem with the code!")
