@@ -38,6 +38,29 @@ def is_three_row(board, p):
     return False
 
 
+# Coordinates Converter; Argument: A list, Returns: Modifiers Argument
+def coord_convert(coord):
+    if coord in [[1, 1], [2, 2], [3, 3]]:
+        coord[0] -= 1
+        coord[1] -= 1
+        return coord
+    elif coord in [[1, 2], [2, 3]]:
+        coord[1] -= 2
+        return coord
+    elif coord in [[2, 1], [3, 2]]:
+        coord[0] -= 2
+        return coord
+    elif coord in [[3, 1]]:
+        coord[0] -= 3
+        coord[1] += 1
+        return coord
+    elif coord in [[1, 3]]:
+        coord[0] += 1
+        coord[1] -= 3
+        return coord
+    return coord
+
+
 cell = str(input("Enter cells: ")).upper()
 cell = [" "+i for i in cell]  # A list with one "front space" with a "number"
 cell = [cell[i:i+3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
@@ -46,6 +69,19 @@ frame()
 for x in range(0, len(cell)):
     print(f"|{''.join(cell[x])} |")
 frame()
+
+valid = False
+while not valid:
+    coordinates = input("Enter the coordinates: ")
+    coordinates = list(coordinates[:1] + coordinates[2:])
+    if True:
+        print("This cell is occupied! Choose another one!")
+    if True:
+        print("You should enter numbers!")
+    if True:
+        print("Coordinates should be from 1 to 3!")
+    break
+
 
 if is_three_row(cell, "X") and is_three_row(cell, "O") or abs(many(cell, "X") - many(cell, "O")) >= 2:
     print("Impossible")
