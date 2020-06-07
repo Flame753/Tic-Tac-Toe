@@ -1,5 +1,8 @@
+import string
+
+
 def frame():
-    print(9*"-")
+    print(9 * "-")
 
 
 def many(board, p):
@@ -62,8 +65,8 @@ def coord_convert(coord):
 
 
 cell = str(input("Enter cells: ")).upper()
-cell = [" "+i for i in cell]  # A list with one "front space" with a "number"
-cell = [cell[i:i+3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
+cell = [" " + i for i in cell]  # A list with one "front space" with a "number"
+cell = [cell[i:i + 3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
 
 frame()
 for x in range(0, len(cell)):
@@ -72,16 +75,16 @@ frame()
 
 valid = False
 while not valid:
-    coordinates = input("Enter the coordinates: ")
-    coordinates = list(coordinates[:1] + coordinates[2:])
+    coordinates = [x for x in input("Enter the coordinates: ")]
+    #coordinates = [int(x) for x in coordinates]
+    print(coordinates)
+    if type(coordinates) == str():  # Need some more work (Look into Exceptions)
+        print("You should enter numbers!")
+    if coordinates not in [[x, y] for x in range(1, 4) for y in range(1, 4)]:  # Good
+        print("Coordinates should be from 1 to 3!")
     if True:
         print("This cell is occupied! Choose another one!")
-    if True:
-        print("You should enter numbers!")
-    if True:
-        print("Coordinates should be from 1 to 3!")
     break
-
 
 if is_three_row(cell, "X") and is_three_row(cell, "O") or abs(many(cell, "X") - many(cell, "O")) >= 2:
     print("Impossible")
