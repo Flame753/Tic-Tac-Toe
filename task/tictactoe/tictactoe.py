@@ -64,6 +64,14 @@ def coord_convert(coord):
     return coord
 
 
+# Returns True if the spot is empty
+def is_empty(board, coord):
+    if board[coord[0]][coord[1]] == "X" or "O":
+        return False
+    else:
+        return True
+
+
 cell = str(input("Enter cells: ")).upper()
 cell = [" " + i for i in cell]  # A list with one "front space" with a "number"
 cell = [cell[i:i + 3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
