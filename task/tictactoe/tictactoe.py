@@ -42,7 +42,7 @@ def is_three_row(board, p):
 
 
 # Coordinates Converter; Argument: A list, Returns: Modifiers Argument
-def coord_convert(coord):
+def coord_convert(coord):  # NEED TO BE FIXED; NOT RIGHT
     if coord in [[1, 1], [2, 2], [3, 3]]:
         coord[0] -= 1
         coord[1] -= 1
@@ -66,7 +66,8 @@ def coord_convert(coord):
 
 # Returns True if the spot is empty
 def is_empty(board, coord):
-    if board[coord[0]][coord[1]] == "X" or "O":
+    if_piece_there = board[coord[0]][coord[1]]
+    if if_piece_there in ["X", "O"]:
         return False
     else:
         return True
@@ -83,14 +84,16 @@ frame()
 
 valid = False
 while not valid:
-    coordinates = [x for x in input("Enter the coordinates: ")]
-    #coordinates = [int(x) for x in coordinates]
-    print(coordinates)
-    if type(coordinates) == str():  # Need some more work (Look into Exceptions)
+    coordinate = [x for x in input("Enter the coordinates: ")]
+    coordinate.remove(" ")
+    coordinate = [int(x) for x in coordinate]  # Exception here
+    if type(coordinate) == str():  # Need some more work (Look into Exceptions)
         print("You should enter numbers!")
-    if coordinates not in [[x, y] for x in range(1, 4) for y in range(1, 4)]:  # Good
+    if coordinate not in [[x, y] for x in range(1, 4) for y in range(1, 4)]:  # Good
         print("Coordinates should be from 1 to 3!")
-    if True:
+    if is_empty(cell, coord_convert(coordinate)):
+        print("works")  # Need to finish; put x or o in that spot
+    else:
         print("This cell is occupied! Choose another one!")
     break
 
