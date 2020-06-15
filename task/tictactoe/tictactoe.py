@@ -41,26 +41,26 @@ def is_three_row(board, p):
     return False
 
 
-# Coordinates Converter; Argument: A list, Returns: Modifiers Argument
-def coord_convert(coord):  # NEED TO BE FIXED; NOT RIGHT
-    if coord in [[1, 1], [2, 2], [3, 3]]:
-        coord[0] -= 1
-        coord[1] -= 1
+# Coordinates Converter; Argument: A list, Returns: New Converter
+def coord_convert(coord):
+    if coord == [1, 1]:
+        return [2, 0]
+    elif coord == [1, 2]:
+        return [1, 0]
+    elif coord == [1, 3]:
+        return [1, 3]
+    elif coord == [2, 1]:
         return coord
-    elif coord in [[1, 2], [2, 3]]:
-        coord[1] -= 2
-        return coord
-    elif coord in [[2, 1], [3, 2]]:
-        coord[0] -= 2
-        return coord
-    elif coord in [[3, 1]]:
-        coord[0] -= 3
-        coord[1] += 1
-        return coord
-    elif coord in [[1, 3]]:
-        coord[0] += 1
-        coord[1] -= 3
-        return coord
+    elif coord == [2, 2]:
+        return [1, 1]
+    elif coord == [2, 3]:
+        return [0, 1]
+    elif coord == [3, 1]:
+        return [2, 2]
+    elif coord == [3, 2]:
+        return [1, 2]
+    elif coord == [3, 3]:
+        return [0, 2]
     return coord
 
 
