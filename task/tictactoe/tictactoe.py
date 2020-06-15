@@ -67,7 +67,8 @@ def coord_convert(coord):
 # Returns True if the spot is empty
 def is_empty(board, coord):
     if_piece_there = board[coord[0]][coord[1]]
-    if if_piece_there in ["X", "O"]:
+    symbols = [" X", " O"]
+    if if_piece_there in symbols:
         return False
     else:
         return True
