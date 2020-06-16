@@ -1,3 +1,6 @@
+import string
+
+
 def frame():
     print(9 * "-")
 
@@ -47,25 +50,9 @@ def is_three_row(board, p):
 
 # Coordinates Converter; Argument: A list, Returns: New Converter
 def coord_convert(coord):
-    if coord == [1, 1]:
-        return [2, 0]
-    elif coord == [1, 2]:
-        return [1, 0]
-    elif coord == [1, 3]:
-        return [1, 3]
-    elif coord == [2, 1]:
-        return coord
-    elif coord == [2, 2]:
-        return [1, 1]
-    elif coord == [2, 3]:
-        return [0, 1]
-    elif coord == [3, 1]:
-        return [2, 2]
-    elif coord == [3, 2]:
-        return [1, 2]
-    elif coord == [3, 3]:
-        return [0, 2]
-    return coord
+    i = 3 - coord[1]
+    j = coord[0] - 1
+    return i, j
 
 
 # Returns True if the spot is empty
@@ -85,23 +72,21 @@ print_board(cell)
 
 while True:
     try:
-        coordinate = [x for x in input("Enter the coordinates: ")]
-        coordinate.remove(" ")
-        coordinate = [int(x) for x in coordinate]  # Exception here
+        coordinate = input("Enter the coordinates: ")
+        coordinate = (int(coordinate[0]), int(coordinate[2]))
+
         new_coord = coord_convert(coordinate)
-        if coordinate not in [[x, y] for x in range(1, 4) for y in range(1, 4)]:  # Good
+        if coordinate not in [(x, y) for x in range(1, 4) for y in range(1, 4)]:
             print("Coordinates should be from 1 to 3!")
-        if is_empty(cell, new_coord):
+        elif is_empty(cell, new_coord):
             cell[new_coord[0]][new_coord[1]] = " X"
-            print(cell[new_coord[0]][new_coord[1]])
+            print_board(cell)
+            break
         else:
             print("This cell is occupied! Choose another one!")
-        break
     except ValueError:
         print("You should enter numbers!")
 
-
-print_board(cell)
 
 if is_three_row(cell, "X") and is_three_row(cell, "O") or abs(many(cell, "X") - many(cell, "O")) >= 2:
     print("Impossible")
