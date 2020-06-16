@@ -1,8 +1,12 @@
-import string
-
-
 def frame():
     print(9 * "-")
+
+
+def print_board(board):
+    frame()
+    for x in range(0, len(board)):
+        print(f"|{''.join(board[x])} |")
+    frame()
 
 
 def many(board, p):
@@ -77,26 +81,27 @@ def is_empty(board, coord):
 cell = str(input("Enter cells: ")).upper()
 cell = [" " + i for i in cell]  # A list with one "front space" with a "number"
 cell = [cell[i:i + 3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
+print_board(cell)
 
-frame()
-for x in range(0, len(cell)):
-    print(f"|{''.join(cell[x])} |")
-frame()
-
-valid = False
-while not valid:
-    coordinate = [x for x in input("Enter the coordinates: ")]
-    coordinate.remove(" ")
-    coordinate = [int(x) for x in coordinate]  # Exception here
-    if type(coordinate) == str():  # Need some more work (Look into Exceptions)
+while True:
+    try:
+        coordinate = [x for x in input("Enter the coordinates: ")]
+        coordinate.remove(" ")
+        coordinate = [int(x) for x in coordinate]  # Exception here
+        new_coord = coord_convert(coordinate)
+        if coordinate not in [[x, y] for x in range(1, 4) for y in range(1, 4)]:  # Good
+            print("Coordinates should be from 1 to 3!")
+        if is_empty(cell, new_coord):
+            cell[new_coord[0]][new_coord[1]] = " X"
+            print(cell[new_coord[0]][new_coord[1]])
+        else:
+            print("This cell is occupied! Choose another one!")
+        break
+    except ValueError:
         print("You should enter numbers!")
-    if coordinate not in [[x, y] for x in range(1, 4) for y in range(1, 4)]:  # Good
-        print("Coordinates should be from 1 to 3!")
-    if is_empty(cell, coord_convert(coordinate)):
-        print("works")  # Need to finish; put x or o in that spot
-    else:
-        print("This cell is occupied! Choose another one!")
-    break
+
+
+print_board(cell)
 
 if is_three_row(cell, "X") and is_three_row(cell, "O") or abs(many(cell, "X") - many(cell, "O")) >= 2:
     print("Impossible")
