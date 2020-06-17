@@ -1,6 +1,3 @@
-import string
-
-
 def frame():
     print(9 * "-")
 
@@ -65,12 +62,13 @@ def is_empty(board, coord):
         return True
 
 
-cell = str(input("Enter cells: ")).upper()
+cell = " " * 9  # The Board
 cell = [" " + i for i in cell]  # A list with one "front space" with a "number"
 cell = [cell[i:i + 3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
 print_board(cell)
 
-while True:
+
+while True:  # Checks User input
     try:
         coordinate = input("Enter the coordinates: ")
         coordinate = (int(coordinate[0]), int(coordinate[2]))
