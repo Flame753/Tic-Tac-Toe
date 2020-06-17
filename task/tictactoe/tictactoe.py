@@ -9,8 +9,12 @@ def print_board(board):
     frame()
 
 
+def add_space(symbol):
+    return " " + symbol
+
+
 def many(board, p):
-    symbol = " " + p
+    symbol = add_space(p)
     total = 0
     for row in range(len(board)):
         amount = board[row].count(symbol)
@@ -19,7 +23,7 @@ def many(board, p):
 
 
 def is_three_row(board, p):
-    symbol = " " + p
+    symbol = add_space(p)
     col_counter = 0
     backslash_counter = 0
     slash = - 1
@@ -68,8 +72,8 @@ cell = [cell[i:i + 3] for i in range(0, len(cell), 3)]  # A 3 number in a list w
 print_board(cell)
 
 turn = 0
-symbol = [" X", " O"]
-while turn < 9:  # Checks User input
+player = ["X", "O"]
+while turn < 9 and not is_three_row(cell, "X") and not is_three_row(cell, "O"):  # Checks User input and shows field
     try:
         coordinate = input("Enter the coordinates: ")
         coordinate = (int(coordinate[0]), int(coordinate[2]))
@@ -78,7 +82,7 @@ while turn < 9:  # Checks User input
         if coordinate not in [(x, y) for x in range(1, 4) for y in range(1, 4)]:
             print("Coordinates should be from 1 to 3!")
         elif is_empty(cell, new_coord):
-            cell[new_coord[0]][new_coord[1]] = symbol[turn % 2]
+            cell[new_coord[0]][new_coord[1]] = add_space(player[turn % 2])
             print_board(cell)
             turn += 1
         else:
