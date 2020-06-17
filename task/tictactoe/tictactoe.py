@@ -67,8 +67,9 @@ cell = [" " + i for i in cell]  # A list with one "front space" with a "number"
 cell = [cell[i:i + 3] for i in range(0, len(cell), 3)]  # A 3 number in a list within a list
 print_board(cell)
 
-
-while True:  # Checks User input
+turn = 0
+symbol = [" X", " O"]
+while turn < 9:  # Checks User input
     try:
         coordinate = input("Enter the coordinates: ")
         coordinate = (int(coordinate[0]), int(coordinate[2]))
@@ -77,12 +78,14 @@ while True:  # Checks User input
         if coordinate not in [(x, y) for x in range(1, 4) for y in range(1, 4)]:
             print("Coordinates should be from 1 to 3!")
         elif is_empty(cell, new_coord):
-            cell[new_coord[0]][new_coord[1]] = " X"
+            cell[new_coord[0]][new_coord[1]] = symbol[turn % 2]
             print_board(cell)
-            break
+            turn += 1
         else:
             print("This cell is occupied! Choose another one!")
     except ValueError:
+        print("You should enter numbers!")
+    except IndexError:
         print("You should enter numbers!")
 
 
